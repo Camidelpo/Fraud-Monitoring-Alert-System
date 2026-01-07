@@ -1,0 +1,143 @@
+select * from creditcard
+-- se agrega un id surrogate para facilitar el modelado analitico --
+
+ALTER TABLE creditcard
+ADD transaction_id BIGINT IDENTITY(1,1);
+
+
+-- se crea tabla de hechos --
+CREATE TABLE fact_transactions (
+    transaction_id BIGINT IDENTITY (1,1) PRIMARY KEY,
+    time_seconds INT,
+    amount DECIMAL(10,2),
+    is_fraud BIT
+);
+
+INSERT INTO fact_transactions (time_seconds, amount, is_fraud)
+SELECT
+    Time,
+    Amount,
+    Class
+FROM creditcard;
+
+SELECT TOP 10 * FROM fact_transactions
+
+--Verificacion y limpieza --
+
+select * from fact_transactions
+where amount < 0
+
+select * from fact_transactions
+where amount is null or is_fraud is null 
+
+SELECT
+    time_seconds,
+    time_seconds / 3600.0 AS hours_since_start
+FROM fact_transactions;
+
+SELECT
+    time_seconds,
+    is_fraud,
+    amount
+FROM fact_transactions
+ORDER BY time_seconds
+
+ALTER TABLE fact_transactions
+ADD hours_since_start DECIMAL(10,2);
+
+UPDATE fact_transactions
+SET hours_since_start = time_seconds / 3600.0;
+
+
+ALTER TABLE fact_transactions
+add time_bucket VARCHAR(20);
+
+UPDATE fact_transactions
+SET time_bucket = 
+    CASE
+        WHEN hours_since_start < 24 THEN '0–24 horas'
+        WHEN hours_since_start < 48 THEN '24–48 horas'
+        WHEN hours_since_start < 72 THEN '48–72 horas'
+        ELSE '+72 horas'
+    END;
+
+EXEC sp_rename'fact_transactions.is_fraud', 'Class', 'COLUMN';
+
+select top 10 * from fact_transactions
+
+-- Comenzamos con las consultas 
+
+select count (*) as total_transactions
+from fact_transactions
+
+-- Disctribucion fraude vs no fraude
+
+SELECT
+    Class,
+    COUNT(*) AS transactions
+FROM fact_transactions
+GROUP BY class;
+
+-- Tasa de fraude -- 
+
+SELECT 
+    CAST(
+        COUNT(CASE WHEN class = 1 THEN 1 END) * 1.0 
+        / COUNT(*) 
+    AS DECIMAL(10,4)) AS fraud_rate
+FROM fact_transactions;
+
+-- Cantidad total de fraudes -- 
+
+SELECT 
+    COUNT(*) AS fraud_transactions
+FROM fact_transactions
+WHERE class = 1;
+
+-- Monto total y promedio por tipo --
+
+SELECT
+    class,
+    COUNT(*) AS transactions,
+    SUM(amount) AS total_amount,
+    AVG(amount) AS avg_amount
+FROM fact_transactions
+GROUP BY class;
+
+-- Impacto economico del fraude -- 
+
+SELECT
+    SUM(amount) AS total_fraud_amount
+FROM fact_transactions
+WHERE class = 1;
+
+-- Fraude por Bucket temporal --
+
+SELECT
+    time_bucket,
+    COUNT(*) AS fraud_transactions,
+    SUM(amount) AS fraud_amount
+FROM fact_transactions
+WHERE class = 1
+GROUP BY time_bucket
+ORDER BY fraud_transactions DESC;
+
+-- Comparacion general por bucket --
+
+SELECT
+    time_bucket,
+    COUNT(*) AS total_transactions,
+    SUM(CASE WHEN class = 1 THEN 1 ELSE 0 END) AS fraud_transactions
+FROM fact_transactions
+GROUP BY time_bucket
+ORDER BY time_bucket;
+
+-- Comparacion de montos (fraude vs normal)
+
+SELECT
+    class,
+    MIN(amount) AS min_amount,
+    MAX(amount) AS max_amount,
+    AVG(amount) AS avg_amount
+FROM fact_transactions
+GROUP BY class;
