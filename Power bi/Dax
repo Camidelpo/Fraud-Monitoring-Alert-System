@@ -1,0 +1,36 @@
+Average Fraud Amount = 
+CALCULATE(
+    AVERAGE(fact_transactions[amount]),
+    fact_transactions[Class] = 1
+)
+
+Avg amount = AVERAGE(fact_transactions[amount])
+
+Fraud Rate % = DIVIDE([Total Fraud Transactions], [Total Transactions], 0)
+
+Fraud Transactions by Bucket = 
+CALCULATE(
+    COUNT(fact_transactions[transaction_id]),
+    fact_transactions[Class] = 1
+)
+
+System Status = 
+IF(
+    [Fraud Rate %] > 0.0025, "🔴 CRITICAL – Immediate action required",
+    IF(
+        [Fraud Rate %] > 0.0015, "🟡 WARNING – Monitor closely",
+        "🟢 OK – System stable"
+    )
+)
+
+Total amount = SUM(fact_transactions[amount])
+
+Total fraud amount = CALCULATE(SUM(fact_transactions[amount]),fact_transactions[Class]= 1)
+
+Total Fraud Transactions = 
+CALCULATE(
+    COUNT(fact_transactions[transaction_id]),
+    fact_transactions[Class]= 1
+)
+
+Total Transactions = COUNT(fact_transactions[transaction_id])
