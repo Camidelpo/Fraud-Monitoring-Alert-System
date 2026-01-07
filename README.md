@@ -1,5 +1,6 @@
-### Fraud-Monitoring-Alert-System
 
+# # Fraud-Monitoring-Alert-System
+----
 # Project Description
 
 This project presents a fraud monitoring system built on top of individual financial transactions, combining SQL for data modeling and Power BI for visualization, KPIs, and alert logic.
