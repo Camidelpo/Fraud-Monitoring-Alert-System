@@ -1,12 +1,13 @@
-# Fraud-Monitoring-Alert-System
+## Fraud-Monitoring-Alert-System
 
-Project Description
+#Project Description
 
 This project presents a fraud monitoring system built on top of individual financial transactions, combining SQL for data modeling and Power BI for visualization, KPIs, and alert logic.
 
 Rather than a purely descriptive dashboard, the solution was designed as an active monitoring tool, capable of evaluating system status, identifying anomalous behavior, and supporting early decision-making for fraud and risk teams.
+----
 
-Project Objective
+#Project Objective
 
 The main objective of this project is to improve fraud visibility and early detection, enabling:
 
@@ -19,8 +20,9 @@ Automatic system status classification (Stable / Warning / Critical)
 Faster decision-making without relying on manual report reviews
 
 In a real-world scenario, this approach helps reduce detection time and prioritize relevant fraud investigations.
+----
 
-Analysis Methodology
+#Analysis Methodology
 
 The analysis followed a monitoring-oriented and business-focused approach:
 
@@ -37,8 +39,9 @@ Development of a monitoring dashboard in Power BI
 Definition of alert rules and system status logic
 
 The focus was placed on clarity, consistency, and operational usability.
+---
 
-Dataset Considerations (Class Imbalance)
+#Dataset Considerations (Class Imbalance)
 
 The dataset used in this project is highly imbalanced, with fraudulent transactions representing approximately 0.17% of total operations.
 This distribution is typical of real-world financial fraud scenarios.
@@ -54,8 +57,9 @@ Average transaction amounts and concentration of fraud
 Alert logic based on deviations from expected behavior
 
 This approach preserves data realism while still extracting meaningful and actionable signals.
+---
 
-Working Hypotheses
+#Working Hypotheses
 
 Fraud events are rare but show detectable temporal patterns
 
@@ -64,8 +68,9 @@ The average amount of fraudulent transactions is higher than legitimate ones
 Small variations in fraud rate can signal relevant risk events
 
 Automated alerts reduce dependency on manual analysis
+---
 
-Technologies Used
+#Technologies Used
 
 SQL: data preparation and aggregation
 
@@ -74,8 +79,9 @@ Power BI: dashboarding, visualization, and monitoring
 DAX: KPI definitions, alert logic, and system status
 
 Power BI Service / Power Automate (conceptual): automated notifications
+----
 
-KPIs Monitored
+#KPIs Monitored
 
 The KPIs were defined with a monitoring and risk-control focus:
 
@@ -83,7 +89,7 @@ Total Transactions: ~285,000
 
 Total Fraud Transactions: 492
 
-Fraud Rate: ~0.17%
+Fraud Rate: ~0.0017%
 
 Total Fraud Amount: ~$4,800
 
@@ -92,8 +98,9 @@ Fraud Rate by time bucket
 Fraud Transactions by time bucket
 
 These indicators allow evaluation of volume, frequency, impact, and temporal behavior of fraud.
+----
 
-Dashboard & Alert System
+#Dashboard & Alert System
 
 The dashboard works as an operational control panel, including:
 
@@ -107,7 +114,7 @@ Control table with metrics per time bucket
 
 Visual System Status indicator
 
-Alert Logic
+#Alert Logic
 
 The system automatically classifies monitoring status as:
 
@@ -124,8 +131,9 @@ Fraud rate
 Volume of fraudulent transactions
 
 Relative changes between time windows
+----
 
-Analysis Conclusions
+#Analysis Conclusions
 
 Based on the analysis and monitoring setup:
 
@@ -140,8 +148,9 @@ Even small changes in fraud rate justify early alerts
 The current system status is classified as WARNING – Monitor closely
 
 These findings highlight the value of proactive monitoring even when fraud volume is limited.
+---
 
-Recommended Next Steps
+#Recommended Next Steps
 
 Implement real alerts via Power Automate (email / Teams)
 
@@ -152,12 +161,13 @@ Integrate machine learning models for fraud risk scoring
 Extend analysis to additional segments (customer, channel, region)
 
 Incorporate higher-frequency or near-real-time data
+---
 
-Role & Scope
+#Role & Scope
 
 Role: Data Analyst / BI Analyst
 
-Responsibilities:
+#Responsibilities:
 
 Data modeling and preparation
 
@@ -168,8 +178,9 @@ Development of the monitoring dashboard
 Analysis and interpretation of results
 
 The project covers the full workflow from raw data to decision-support monitoring.
+----
 
-Final Conclusion
+#Final Conclusion
 
 This project demonstrates how Power BI can be used as an active fraud monitoring platform, even when working with highly imbalanced datasets.
 
