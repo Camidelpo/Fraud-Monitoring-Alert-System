@@ -5,6 +5,7 @@
 This project presents a fraud monitoring system built on top of individual financial transactions, combining SQL for data modeling and Power BI for visualization, KPIs, and alert logic.
 
 Rather than a purely descriptive dashboard, the solution was designed as an active monitoring tool, capable of evaluating system status, identifying anomalous behavior, and supporting early decision-making for fraud and risk teams.
+
 ----
 
 # Project Objective
@@ -20,6 +21,7 @@ Automatic system status classification (Stable / Warning / Critical)
 Faster decision-making without relying on manual report reviews
 
 In a real-world scenario, this approach helps reduce detection time and prioritize relevant fraud investigations.
+
 ----
 
 # Analysis Methodology
@@ -39,6 +41,7 @@ Development of a monitoring dashboard in Power BI
 Definition of alert rules and system status logic
 
 The focus was placed on clarity, consistency, and operational usability.
+
 ---
 
 # Dataset Considerations (Class Imbalance)
@@ -57,6 +60,7 @@ Average transaction amounts and concentration of fraud
 Alert logic based on deviations from expected behavior
 
 This approach preserves data realism while still extracting meaningful and actionable signals.
+
 ---
 
 # Working Hypotheses
@@ -68,6 +72,7 @@ The average amount of fraudulent transactions is higher than legitimate ones
 Small variations in fraud rate can signal relevant risk events
 
 Automated alerts reduce dependency on manual analysis
+
 ---
 
 # Technologies Used
@@ -79,6 +84,7 @@ Power BI: dashboarding, visualization, and monitoring
 DAX: KPI definitions, alert logic, and system status
 
 Power BI Service / Power Automate (conceptual): automated notifications
+
 ----
 
 # KPIs Monitored
@@ -98,6 +104,7 @@ Fraud Rate by time bucket
 Fraud Transactions by time bucket
 
 These indicators allow evaluation of volume, frequency, impact, and temporal behavior of fraud.
+
 ----
 
 # Dashboard & Alert System
@@ -131,6 +138,7 @@ Fraud rate
 Volume of fraudulent transactions
 
 Relative changes between time windows
+
 ----
 
 # Analysis Conclusions
@@ -148,6 +156,7 @@ Even small changes in fraud rate justify early alerts
 The current system status is classified as WARNING – Monitor closely
 
 These findings highlight the value of proactive monitoring even when fraud volume is limited.
+
 ---
 
 # Recommended Next Steps
@@ -161,6 +170,7 @@ Integrate machine learning models for fraud risk scoring
 Extend analysis to additional segments (customer, channel, region)
 
 Incorporate higher-frequency or near-real-time data
+
 ---
 
 # Role & Scope
@@ -178,6 +188,7 @@ Development of the monitoring dashboard
 Analysis and interpretation of results
 
 The project covers the full workflow from raw data to decision-support monitoring.
+
 ----
 
 # Final Conclusion
